@@ -23,7 +23,7 @@ public class Cours {
 	@ManyToOne
 	@JoinColumn(name = "formateur_id")
 	private Formateur formateur;
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne
 	@JoinColumn(name = "matiere_id")
 	private Matiere matiere;
 
