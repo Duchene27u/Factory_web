@@ -2,6 +2,7 @@ package sopra.formation.dao;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -39,5 +40,5 @@ public interface IUtilisateurDao extends JpaRepository<Utilisateur, Long>, Utili
 	List<Stagiaire> findAllStagiaires();
 	
 	@Query("select s from Stagiaire s where s.id = :id")
-	Stagiaire findStagiaireById(@Param("id") Long id);
+	Optional<Stagiaire> findStagiaireById(@Param("id") Long id);
 }

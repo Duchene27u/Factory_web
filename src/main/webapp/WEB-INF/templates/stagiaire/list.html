@@ -4,7 +4,7 @@
 		layout:decorator="layout.html">
 <head>
 <meta charset="UTF-8">
-<title>Liste des stagiaire</title>
+<title>Liste des stagiaires</title>
 </head>
 <body>
 	<section layout:fragment="monContenu">
@@ -15,7 +15,7 @@
 				<th>Identifiant</th>
 				<th>Version</th>
 				<th>Nom</th>
-				<th>Prénom</th>
+				<th>Prenom</th>
 				<th>Email</th>
 				<th>Droit</th>
 				<th>Telephone</th>
@@ -37,8 +37,8 @@
 					<td>[[${stag.telephone}]]</td>
 					<td>[[${stag.adresse?.rue}]] [[${stag.adresse?.codePostal}]] [[${stag.adresse?.ville}]]</td>
 					<td><div class="btn-group btn-group-sm">
-						    <a th:href="@{/stagnisseur/edit(id=${stag.id})}" type="button" class="btn btn-primary"><i class="bi bi-pen-fill"></i></a>
-						    <a th:href="@{/stagnisseur/delete(id=${stag.id})}" type="button" class="btn btn-danger"><i class="bi bi-trash-fill"></i></a>
+						    <a th:href="@{/stagiaire/edit(id=${stag.id})}" type="button" class="btn btn-primary"><i class="bi bi-pen-fill"></i></a>
+						    <a th:href="@{/stagiaire/delete(id=${stag.id})}" type="button" class="btn btn-danger"><i class="bi bi-trash-fill"></i></a>
 						  </div>
 					</td>
 				</tr>
