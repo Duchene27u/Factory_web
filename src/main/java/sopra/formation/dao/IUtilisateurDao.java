@@ -34,4 +34,10 @@ public interface IUtilisateurDao extends JpaRepository<Utilisateur, Long>, Utili
 			+ "select distinct f from Formateur f join f.absences a where a.date >= :dtDebut and a.date <= :dtFin"
 			+ ") and m.titre = :nomMatiere")
 	List<Formateur> findByDispoAndMatiere(@Param("nomMatiere") String nomMatiere, @Param("dtDebut") LocalDate dtDebut, @Param("dtFin") LocalDate dtFin);
+	
+	@Query("select s from Stagiaire s")
+	List<Stagiaire> findAllStagiaires();
+	
+	@Query("select s from Stagiaire s where s.id = :id")
+	Stagiaire findStagiaireById(@Param("id") Long id);
 }

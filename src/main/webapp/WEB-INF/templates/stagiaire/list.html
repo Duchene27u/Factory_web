@@ -4,11 +4,53 @@
 		layout:decorator="layout.html">
 <head>
 <meta charset="UTF-8">
-<title></title>
+<title>Liste des stagiaire</title>
 </head>
 <body>
 	<section layout:fragment="monContenu">
-		
+		<div class="container mt-3">
+		<table class="table table-striped">
+			<thead>
+			<tr>
+				<th>Identifiant</th>
+				<th>Version</th>
+				<th>Nom</th>
+				<th>Prénom</th>
+				<th>Email</th>
+				<th>Droit</th>
+				<th>Telephone</th>
+				<th>Rue</th>
+				<th>Code postal</th>
+				<th>Ville</th>
+				<th></th>
+			</tr>
+			</thead>
+
+			<tbody>
+					<tr th:each="stag : ${stagiaires}">
+					<td>[[${stag.id}]]</td>
+					<td>[[${stag.version}]]</td>
+					<td>[[${stag.nom}]]</td>
+					<td>[[${stag.prenom}]]</td>
+					<td>[[${stag.email}]]</td>
+					<td>[[${stag.droit}]]</td>
+					<td>[[${stag.telephone}]]</td>
+					<td>[[${stag.adresse?.rue}]] [[${stag.adresse?.codePostal}]] [[${stag.adresse?.ville}]]</td>
+					<td><div class="btn-group btn-group-sm">
+						    <a th:href="@{/stagnisseur/edit(id=${stag.id})}" type="button" class="btn btn-primary"><i class="bi bi-pen-fill"></i></a>
+						    <a th:href="@{/stagnisseur/delete(id=${stag.id})}" type="button" class="btn btn-danger"><i class="bi bi-trash-fill"></i></a>
+						  </div>
+					</td>
+				</tr>
+			</tbody>
+			
+			<tfoot>
+				<tr>
+					<td colspan="11"><a th:href="@{/stagiaire/add}" class="btn btn-success btn-lg"><i class="bi bi-plus-square-fill"></i></a></td>
+				</tr>			
+			</tfoot>
+		</table>
+	</div>
 	</section>
 </body>
 </html>
