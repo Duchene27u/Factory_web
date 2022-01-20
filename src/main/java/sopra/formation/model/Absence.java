@@ -9,6 +9,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Version;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 @Entity
 public class Absence {
 	@Id
@@ -16,6 +18,7 @@ public class Absence {
 	private Long id;
 	@Version
 	private int version;
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private LocalDate date;
 	@ManyToOne
 	@JoinColumn(name="formateur_id")

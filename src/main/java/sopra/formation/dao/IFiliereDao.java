@@ -16,4 +16,10 @@ public interface IFiliereDao extends JpaRepository<Filiere, Long> {
 	// Rechercher une filière par son id en préchargeant la salle, le référent et les cours
 	@Query("select distinct f from Filiere f left join fetch f.cours c left join fetch c.matiere where f.id = :id")
 	Filiere findByIdWithSalleReferentCours(@Param("id") Long id);
+	
+	@Query("select distinct f from Filiere f left join fetch f.cours")
+	List<Filiere> findAllWithCours(); 
+	
+	@Query("select distinct f from Filiere f left join fetch f.cursus c")
+	List<Filiere> findAllWithCursus();
 }

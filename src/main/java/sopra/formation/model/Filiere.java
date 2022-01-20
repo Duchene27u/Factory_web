@@ -13,6 +13,10 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Version;
+import javax.validation.constraints.FutureOrPresent;
+import javax.validation.constraints.NotNull;
+
+import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
 public class Filiere {
@@ -21,12 +25,15 @@ public class Filiere {
 	private Long id;
 	@Version
 	private int version;
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
+	@FutureOrPresent(message = "La filière doit avoir lieu dans le futur")
 	private LocalDate dateDebut;
 	private int duree;
 	@Enumerated(EnumType.STRING)
 	private Dispositif dispositif;
 	@ManyToOne
 	@JoinColumn(name = "gestionnaire_id")
+	@NotNull(message = "La filière doit avoir un gestionnaire")
 	private Utilisateur gestionnaire;
 	@ManyToOne
 	@JoinColumn(name = "referent_id")

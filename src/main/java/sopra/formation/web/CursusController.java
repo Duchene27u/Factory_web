@@ -15,73 +15,84 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import sopra.formation.dao.ICursusDao;
+import sopra.formation.dao.IFiliereDao;
 import sopra.formation.dao.IUtilisateurDao;
+import sopra.formation.model.Cursus;
 import sopra.formation.model.Droit;
+import sopra.formation.model.Filiere;
 import sopra.formation.model.Stagiaire;
+import sopra.formation.model.Utilisateur;
 
 
 @Controller
-@RequestMapping("/stagiaire")
-public class StagiaireController {
+@RequestMapping("/cursus")
+public class CursusController {
 	
 	@Autowired
-	private IUtilisateurDao utilisateurDao;
+	private ICursusDao cursusDao;
 	
+	@Autowired
+	private IFiliereDao filiereDao;
+
 	
 	@GetMapping("")
 	public String list(Model model) {
-		List<Stagiaire> stagiaires = utilisateurDao.findAllStagiaires();
+		List<Cursus> cursus = cursusDao.findAll();
 
-		model.addAttribute("stagiaires", stagiaires);
+		model.addAttribute("cursus", cursus);
 
-		return "stagiaire/list";
+		return "cursus/list";
 	}
 
 	@GetMapping("/add")
 	public String add(Model model) {
 		
+		model.addAttribute("cursus", new Cursus());
 		model.addAttribute("stagiaire", new Stagiaire());
-		model.addAttribute("droits", Droit.values());
+		model.addAttribute("filiere", new Filiere());
 
-		return "stagiaire/form";
+		return "cursus/form";
 	}
 	
 	@GetMapping("/edit")
 	public String edit(@RequestParam Long id, Model model) {
-		Optional<Stagiaire> optStagiaire = utilisateurDao.findStagiaireById(id);
+		Cursus cursus = cursusDao.findCursusById(id);
 
-		if (optStagiaire.isPresent()) {
-			model.addAttribute("stagiaire", optStagiaire.get());
+		if (cursus.isPresent()) {
+			model.addAttribute("cursus", cursus.get());
 		}
 		
-		model.addAttribute("droits", Droit.values());
+		model.addAttribute("stagiaire", new Stagiaire());
+		model.addAttribute("filiere", new Filiere());
 		
-		return "stagiaire/form";
+		return "cursus/form";
 	}
 	
 		
 	@PostMapping("/save")
-	public String save(@ModelAttribute("stagiaire") @Valid Stagiaire stagiaire, BindingResult result, Model model) {
+	public String save(@ModelAttribute("cursus") @Valid Cursus cursus, BindingResult result, Model model) {
 		
 		if(result.hasErrors()) {
-			return "stagiaire/form";
+			return "cursus/form";
 		}
 		
-		utilisateurDao.save(stagiaire);
+		cursusDao.save(cursus);
 
-		return "redirect:/stagiaire";
+		return "redirect:/cursus";
 	}
 
 	
 	@GetMapping("/cancel")
 	public String cancel() {
-		return "forward:/stagiaire";
+		return "forward:/cursus";
 	}
 
 	@GetMapping("/delete")
 	public String delete(@RequestParam Long id) {
-		utilisateurDao.deleteById(id);
+		cursusDao.deleteById(id);
 
-		return "redirect:/stagiaire";
+		return "redirect:/cursus";
 	}
 }
+

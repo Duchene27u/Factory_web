@@ -33,46 +33,32 @@
 					<div class="form-group">
 						<label for="email">Email:</label> <input type="text"
 							class="form-control" id="email" name="email"
-							th:value="${stagiaire.email}"> <span class="text-danger"
-							th:errors="${stagiaire.email}"></span>
+							th:value="${stagiaire.email}"> 
 					</div>
 					<div class="form-group">
 						<label for="telephone">Telephone:</label> <input type="text"
 							class="form-control" id="telephone" name="telephone"
-							th:value="${stagiaire.telephone}"> <span class="text-danger"
-							th:errors="${stagiaire.telephone}"></span>
+							th:value="${stagiaire.telephone}">
 					</div>
 					<div class="form-group">
 						<label for="rue">Rue:</label> <input type="text"
 							class="form-control" id="rue" name="rue"
-							th:value="${stagiaire.rue}"> <span class="text-danger"
-							th:errors="${stagiaire.rue}"></span>
+							th:value="${stagiaire.adr?.rue}"> 
 					</div>
 					<div class="form-group">
 						<label for="codePostal">Code Postal:</label> <input type="number"
 							class="form-control" id="codePostal" name="codePostal"
-							th:value="${stagiaire.codePostal}"> <span class="text-danger"
-							th:errors="${stagiaire.codePostal}"></span>
+							th:value="${stagiaire.adr?.codePostal}">
 					</div>	
 					<div class="form-group">
 						<label for="ville">Ville:</label> <input type="text"
 							class="form-control" id="ville" name="ville"
-							th:value="${stagiaire.ville}"> <span class="text-danger"
-							th:errors="${stagiaire.ville}"></span>
+							th:value="${stagiaire.adr?.ville}">
 					</div>
-					<div class="form-group">
-						<label for="cursus.id">Cursus:</label> <select
-							class="form-control" name="cursus.id" id="cursus.id">
-							<option value="">Sélectionner un cursus:</option>
-							<option th:each="c : ${cursus}" th:value="${c.id}"
-								th:selected=" == }">[[${f.nom}]]
-								([[${f.prenom}]] )</option>
-						</select> <span class="text-danger" th:errors="${stagiaire.cursus}"></span>
-					</div>						
 				</div>
 				<div class="card-footer">
 					<div class="btn-group btn-group-lg float-right">
-						<button type="submit" class="btn btn-success">
+						<button th:href="@{/stagiaire/save}"  type="submit" class="btn btn-success">
 							<i class="bi bi-check-square"></i>
 						</button>
 						<a th:href="@{/stagiaire/cancel}" type="button"

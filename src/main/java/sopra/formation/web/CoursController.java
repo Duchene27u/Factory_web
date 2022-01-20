@@ -21,8 +21,8 @@ import sopra.formation.dao.IMatiereDao;
 import sopra.formation.dao.IUtilisateurDao;
 import sopra.formation.model.Cours;
 import sopra.formation.model.Filiere;
+import sopra.formation.model.Formateur;
 import sopra.formation.model.Matiere;
-import sopra.formation.model.Utilisateur;
 
 @Controller
 @RequestMapping("/cours")
@@ -55,7 +55,7 @@ public class CoursController {
 
 		model.addAttribute("filieres", filiereDao.findAll());
 		
-		model.addAttribute("formateurs", utilisateurDao.findAll());
+		model.addAttribute("formateurs", utilisateurDao.findAllFormateur());
 		
 		model.addAttribute("matieres", matiereDao.findAll());
 		return "cours/form";
@@ -72,7 +72,7 @@ public class CoursController {
 		List<Filiere> filieres = filiereDao.findAll();
 		model.addAttribute("filieres", filieres);
 		
-		List<Utilisateur> formateurs = utilisateurDao.findAll();
+		List<Formateur> formateurs = utilisateurDao.findAllFormateur();
 		model.addAttribute("formateurs", formateurs);
 		
 		List<Matiere> matieres = matiereDao.findAll();
