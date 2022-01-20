@@ -10,8 +10,9 @@
 	<section layout:fragment="monContenu">
 		<div class="card mt-3">
 			<form th:action="@{/stagiaire/save}" method="post">
-				<input type="hidden" name="id" th:value="${stagiaire.id}"> <input
-					type="hidden" name="version" th:value="${stagiaire.version}">
+				<input type="hidden" name="id" th:value="${stagiaire.id}"> 
+				<input type="hidden" name="version" th:value="${stagiaire.version}">
+				<input type="hidden" name="droit" th:value="${stagiaire.droit}">
 
 				<div class="card-header bg-info text-white">
 					<h3>Edition du stagiaire</h3>
