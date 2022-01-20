@@ -4,14 +4,72 @@
 	layout:decorator="layout.html">
 <head>
 <meta charset="UTF-8">
-<title></title>
+<title>Edition du cursus</title>
 </head>
 <body>
 	<section layout:fragment="monContenu">
-		
+		<div class="card mt-3">
+			<form th:action="@{/cursus/save}" method="post">
+				<input type="hidden" name="id" th:value="${cursus.id}"> <input
+					type="hidden" name="version" th:value="${cursus.version}">
+
+				<div class="card-header bg-info text-white">
+					<h3>Edition du cursus</h3>
+				</div>
+
+				<div class="card-body">
+					<div class="form-group">
+						<label for="stagiaire">Stagiaire:</label> <select
+							class="form-control" name="stagiaire" id="stagiaire">
+							<option value="">Sélectionner un stagiaire</option>
+							<option th:each="stag : ${stagiaires}" th:value="${stag.id}"
+								th:selected="${cursus.stagiaire==stag}">[[${stag.nom}]] [[${stag.prenom}]]</option>
+						</select>
+					</div>
+					<div class="form-group">
+						<label for="filiere">Filiere:</label> <select
+							class="form-control" name="stagiaire" id="stagiaire">
+							<option value="">Sélectionner une filiere</option>
+							<option th:each="fil : ${filieres}" th:value="${fil.id}"
+								th:selected="${cursus.filiere==fil}">[[${fil.id}]]</option>
+						</select>
+					</div>
+					<div class="form-group">
+						<label for="noteC">Note comportement:</label> <input type="number"
+							class="form-control" id="noteC" name="noteC"
+							th:value="${cursus.noteC}"> 
+					</div>
+					<div class="form-group">
+						<label for="commentairesC">Commentaires (comportement):</label> <input type="text"
+							class="form-control" id="commentairesC" name="commentairesC"
+							th:value="${cursus.commentairesC}"> 
+					</div>
+					<div class="form-group">
+						<label for="noteT">Note technique:</label> <input type="number"
+							class="form-control" id="noteT" name="noteT"
+							th:value="${cursus.noteT}"> 
+					</div>
+					<div class="form-group">
+						<label for="commentairesT">Commentaires (technique):</label> <input type="text"
+							class="form-control" id="commentairesT" name="commentairesT"
+							th:value="${cursus.commentairesT}"> 
+					</div>
+				</div>
+				<div class="card-footer">
+					<div class="btn-group btn-group-lg float-right">
+						<button th:href="@{/cursus/save}"  type="submit" class="btn btn-success">
+							<i class="bi bi-check-square"></i>
+						</button>
+						<a th:href="@{/cursus/cancel}" type="button"
+							class="btn btn-warning"> <i class="bi bi-backspace"></i>
+						</a>
+					</div>
+				</div>
+			</form>
+		</div>
 
 	</section>
-	
+
 
 </body>
 </html>

@@ -44,5 +44,7 @@ public interface IUtilisateurDao extends JpaRepository<Utilisateur, Long>, Utili
 	
 	@Query("select s from Stagiaire s where s.id = :id")
 	Optional<Stagiaire> findStagiaireById(@Param("id") Long id);
-
+	
+	@Query("select u from Utilisateur u where u.droit <> sopra.formation.model.Droit.STAGIAIRE")
+	List<Utilisateur> findAllWithoutStagiaire();
 }

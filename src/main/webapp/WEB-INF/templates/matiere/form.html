@@ -8,7 +8,51 @@
 </head>
 <body>
 	<section layout:fragment="monContenu">
-		
+		<div class="card mt-3">
+			<form th:action="@{/matiere/saveBis}" method="post">
+				<input type="hidden" name="id" th:value="${matiere.id}">
+				<input type="hidden" name="version" th:value="${matiere.version}">
+				<div class="card-header bg-info text-white">
+					<h3>Edition de la matière</h3>
+				</div>
+				<div class="card-body">
+					<div class="form-group">
+						<label for="titre">Titre:</label> <input type="text"
+							class="form-control" name="titre" id="titre" th:value="${matiere.titre}"/>
+							<span class="text-danger" th:errors="${matiere.titre}"></span>								
+					</div>
+					
+					<div class="form-group">
+						<label for="duree">Durée:</label> <input type="number"
+							class="form-control" name="duree" id="duree" th:value="${matiere.duree}"/>					
+					</div>
+					<div class="form-group">
+						<label for="objectifs">Objectifs:</label> <input type="text"
+							class="form-control" name="objectifs" id="objectifs" th:value="${matiere.objectifs}"/>
+					</div>
+					<div class="form-group">
+						<label for="preRequis">Pré-requis:</label> <input type="text"
+							class="form-control" name="preRequis" id="preRequis" th:value="${matiere.preRequis}"/>
+					</div>
+					<div class="form-group">
+						<label for="programme">Programme:</label> <input type="text"
+							class="form-control" name="programme" id="programme" th:value="${matiere.programme}"/>
+					</div>
+										
+					
+				</div>
+				<div class="card-footer">
+					<div class="btn-group btn-group-lg float-right">
+						<button type="submit" class="btn btn-success">
+							<i class="bi bi-check-square"></i>
+						</button>
+						<a th:href="@{/matiere/cancel}" type="button"
+							class="btn btn-warning"> <i class="bi bi-backspace"></i>
+						</a>
+					</div>
+				</div>
+			</form>
+		</div>
 
 	</section>
 	

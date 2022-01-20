@@ -4,11 +4,53 @@
 		layout:decorator="layout.html">
 <head>
 <meta charset="UTF-8">
-<title></title>
+<title>Liste des matièeres</title>
 </head>
 <body>
 	<section layout:fragment="monContenu">
-		
+		<div class="container mt-3">
+		<table class="table table-striped">
+			<thead>
+			<tr>
+				<th>Identifiant</th>
+				<th>Version</th>
+				<th>Titre</th>
+				<th>Durée</th>
+				<th>Objectif</th>
+				<th>Pré-requis</th>
+				<th>Programme</th>
+				<th>Cours</th>
+				<th>Competences</th>
+				<th></th>
+			</tr>
+			</thead>
+
+			<tbody>
+				<tr th:each="mat : ${matieres}">
+					<td>[[${mat.id}]]</td>
+					<td>[[${mat.version}]]</td>
+					<td>[[${mat.titre}]]</td>					
+					<td>[[${mat.duree}]]</td>
+					<td>[[${mat.objectifs}]]</td>
+					<td>[[${mat.preRequis}]]</td>
+					<td>[[${mat.programme}]]</td>
+					<td><ul><li th:each="matcours:${mat.cours}" th:text="${matcours.id}" ></li></ul></td>				
+					<td><ul><li th:each="matcomp:${mat.competences}" th:text="${matcomp.id}" ></li></ul></td>			
+					<td><div class="btn-group btn-group-sm">
+						    <a th:href="@{/matiere/edit(id=${mat.id})}" type="button" class="btn btn-primary"><i class="bi bi-pen-fill"></i></a>
+						    <a th:href="@{/matiere/delete(id=${mat.id})}" type="button" class="btn btn-danger"><i class="bi bi-trash-fill"></i></a>
+						  </div>
+					</td>
+				</tr>
+			</tbody>
+			
+			<tfoot>
+				<tr>
+					<td colspan="10"><a th:href="@{/matiere/add}" class="btn btn-success btn-lg"><i class="bi bi-plus-square-fill"></i></a></td>
+				</tr>			
+			</tfoot>
+		</table>
+	</div>
 	</section>
 </body>
 </html>

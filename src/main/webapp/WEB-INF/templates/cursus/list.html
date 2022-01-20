@@ -4,11 +4,52 @@
 		layout:decorator="layout.html">
 <head>
 <meta charset="UTF-8">
-<title></title>
+<title>Liste des cursus</title>
 </head>
 <body>
 	<section layout:fragment="monContenu">
-		
+		<div class="container mt-3">
+		<table class="table table-striped">
+			<thead>
+			<tr>
+				<th>Identifiant</th>
+				<th>Version</th>
+				<th>Stagiaire</th>
+				<th>Filiere</th>
+				<th>Note comportement</th>
+				<th>Commentaires comportement</th>
+				<th>Note technique</th>
+				<th>Commentaires technique</th>
+				<th></th>
+			</tr>
+			</thead>
+
+			<tbody>
+				<tr th:each="cur : ${cursus}">
+					<td>[[${cur.id}]]</td>
+					<td>[[${cur.version}]]</td>
+					<td>[[${cur.stagiaire?.nom}]] [[${cur.stagiaire?.prenom}]]</td>
+					<td>[[${cur.filiere?.id}]]</td>
+					<td>[[${cur.noteC}]]</td>
+					<td>[[${cur.commentairesC}]]</td>
+					<td>[[${cur.noteT}]]</td>
+					<td>[[${cur.commentairesT}]]</td>
+				
+					<td><div class="btn-group btn-group-sm">
+						    <a th:href="@{/cursus/edit(id=${cur.id})}" type="button" class="btn btn-primary"><i class="bi bi-pen-fill"></i></a>
+						    <a th:href="@{/cursus/delete(id=${cur.id})}" type="button" class="btn btn-danger"><i class="bi bi-trash-fill"></i></a>
+						  </div>
+					</td>
+				</tr>
+			</tbody>
+			
+			<tfoot>
+				<tr>
+					<td colspan="9"><a th:href="@{/cursus/add}" class="btn btn-success btn-lg"><i class="bi bi-plus-square-fill"></i></a></td>
+				</tr>			
+			</tfoot>
+		</table>
+	</div>
 	</section>
 </body>
 </html>

@@ -20,6 +20,7 @@ import sopra.formation.dao.ICursusDao;
 import sopra.formation.dao.IFiliereDao;
 import sopra.formation.dao.ISalleDao;
 import sopra.formation.dao.IUtilisateurDao;
+import sopra.formation.model.Dispositif;
 import sopra.formation.model.Filiere;
 
 @Controller
@@ -39,9 +40,17 @@ public class FiliereController {
 	
 	@GetMapping("")
 	public String list(Model model) {
-		List<Filiere> filiere = filiereDao.findAll();
-
-		model.addAttribute("mesFiliere", filiere);
+		List<Filiere> filiere1 = filiereDao.findAllWithCours();
+		List<Filiere> filiere2 = filiereDao.findAllWithCursus();
+		List<Filiere> filiereDTO = filiereDao.findAll();
+		
+		for(int i=0; i<filiereDTO.size();i++) {
+			filiereDTO.get(i).setCours(filiere1.get(i).getCours());
+			filiereDTO.get(i).setCursus(filiere2.get(i).getCursus());
+		}
+		
+		
+		model.addAttribute("mesFilieres", filiereDTO);
 
 		return "filiere/list";
 	}
@@ -52,11 +61,15 @@ public class FiliereController {
 
 		model.addAttribute("cursus", cursusDao.findAll());
 		
-		model.addAttribute("formateurs", utilisateurDao.findAll());
+		model.addAttribute("formateurs", utilisateurDao.findAllFormateur());
 		
 		model.addAttribute("cours", coursDao.findAll());
 		
-		model.addAttribute("salle", salleDao.findAll());
+		model.addAttribute("salles", salleDao.findAll());
+		
+		model.addAttribute("dispositifs", Dispositif.values());
+		
+		model.addAttribute("utilisateurs", utilisateurDao.findAllWithoutStagiaire());
 		
 		return "filiere/form";
 	}
@@ -69,13 +82,13 @@ public class FiliereController {
 			model.addAttribute("filiere", optFiliere.get());
 		}
 		
-		model.addAttribute("cursus", cursusDao.findAll());
+		model.addAttribute("formateurs", utilisateurDao.findAllFormateur());
 		
-		model.addAttribute("formateurs", utilisateurDao.findAll());
+		model.addAttribute("utilisateurs", utilisateurDao.findAllWithoutStagiaire());
 		
-		model.addAttribute("cours", coursDao.findAll());
+		model.addAttribute("salles", salleDao.findAll());
 		
-		model.addAttribute("salle", salleDao.findAll());
+		model.addAttribute("dispositifs", Dispositif.values());
 
 		return "filiere/form";
 	}
@@ -85,6 +98,14 @@ public class FiliereController {
 	public String saveBis(@ModelAttribute("filiere") @Valid Filiere filiere, BindingResult result, Model model) {
 		
 		if(result.hasErrors()) {
+			model.addAttribute("formateurs", utilisateurDao.findAllFormateur());
+			
+			model.addAttribute("utilisateurs", utilisateurDao.findAllWithoutStagiaire());
+			
+			model.addAttribute("salles", salleDao.findAll());
+			
+			model.addAttribute("dispositifs", Dispositif.values());
+			
 			return "filiere/form";
 		}
 		

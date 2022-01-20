@@ -31,7 +31,7 @@
 							th:errors="${cours.ordre}"></span>
 					</div>
 					<div class="form-group">
-						<label for="fournisseur.id">Filière:</label> <select
+						<label for="filiere.id">Filière:</label> <select
 							class="form-control" name="filiere.id" id="filiere.id">
 							<option value="">Sélectionner une filière</option>
 							<option th:each="f : ${filieres}" th:value="${f.id}"
