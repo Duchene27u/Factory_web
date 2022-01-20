@@ -19,10 +19,8 @@ import sopra.formation.dao.ICursusDao;
 import sopra.formation.dao.IFiliereDao;
 import sopra.formation.dao.IUtilisateurDao;
 import sopra.formation.model.Cursus;
-import sopra.formation.model.Droit;
 import sopra.formation.model.Filiere;
 import sopra.formation.model.Stagiaire;
-import sopra.formation.model.Utilisateur;
 
 
 @Controller
@@ -31,6 +29,9 @@ public class CursusController {
 	
 	@Autowired
 	private ICursusDao cursusDao;
+	
+	@Autowired
+	private IUtilisateurDao utilisateurDao;
 	
 	@Autowired
 	private IFiliereDao filiereDao;
@@ -48,23 +49,32 @@ public class CursusController {
 	@GetMapping("/add")
 	public String add(Model model) {
 		
+		List<Stagiaire> stagiaires = utilisateurDao.findAllStagiaires();
+		List<Filiere> filieres = filiereDao.findAll();
+		
+		model.addAttribute("stagiaires", stagiaires);
+		model.addAttribute("filieres", filieres);
+		
 		model.addAttribute("cursus", new Cursus());
-		model.addAttribute("stagiaire", new Stagiaire());
-		model.addAttribute("filiere", new Filiere());
+	
 
 		return "cursus/form";
 	}
 	
 	@GetMapping("/edit")
 	public String edit(@RequestParam Long id, Model model) {
-		Cursus cursus = cursusDao.findCursusById(id);
+		
+		List<Stagiaire> stagiaires = utilisateurDao.findAllStagiaires();
+		List<Filiere> filieres = filiereDao.findAll();
+		
+		Optional<Cursus> optCursus = cursusDao.findCursusById(id);
 
-		if (cursus.isPresent()) {
-			model.addAttribute("cursus", cursus.get());
+		if (optCursus.isPresent()) {
+			model.addAttribute("cursus", optCursus.get());
 		}
 		
-		model.addAttribute("stagiaire", new Stagiaire());
-		model.addAttribute("filiere", new Filiere());
+		model.addAttribute("stagiaires", stagiaires);
+		model.addAttribute("filieres", filieres);
 		
 		return "cursus/form";
 	}

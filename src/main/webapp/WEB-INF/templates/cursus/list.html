@@ -28,8 +28,8 @@
 				<tr th:each="cur : ${cursus}">
 					<td>[[${cur.id}]]</td>
 					<td>[[${cur.version}]]</td>
-					<td>[[${cur.stagiaire}]]</td>
-					<td>[[${cur.filiere}]]</td>
+					<td>[[${cur.stagiaire?.nom}]] [[${cur.stagiaire?.prenom}]]</td>
+					<td>[[${cur.filiere?.id}]]</td>
 					<td>[[${cur.noteC}]]</td>
 					<td>[[${cur.commentairesC}]]</td>
 					<td>[[${cur.noteT}]]</td>

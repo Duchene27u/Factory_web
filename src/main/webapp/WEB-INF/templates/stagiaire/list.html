@@ -35,7 +35,9 @@
 					<td>[[${stag.email}]]</td>
 					<td>[[${stag.droit}]]</td>
 					<td>[[${stag.telephone}]]</td>
-					<td>[[${stag.adr?.rue}]] [[${stag.adr?.codePostal}]] [[${stag.adr?.ville}]]</td>
+					<td>[[${stag.adr?.rue}]] </td>
+					<td>[[${stag.adr?.codePostal}]]</td>
+					<td>[[${stag.adr?.ville}]]</td>
 					<td><div class="btn-group btn-group-sm">
 						    <a th:href="@{/stagiaire/edit(id=${stag.id})}" type="button" class="btn btn-primary"><i class="bi bi-pen-fill"></i></a>
 						    <a th:href="@{/stagiaire/delete(id=${stag.id})}" type="button" class="btn btn-danger"><i class="bi bi-trash-fill"></i></a>
@@ -46,7 +48,7 @@
 			
 			<tfoot>
 				<tr>
-					<td colspan="9"><a th:href="@{/stagiaire/add}" class="btn btn-success btn-lg"><i class="bi bi-plus-square-fill"></i></a></td>
+					<td colspan="11"><a th:href="@{/stagiaire/add}" class="btn btn-success btn-lg"><i class="bi bi-plus-square-fill"></i></a></td>
 				</tr>			
 			</tfoot>
 		</table>

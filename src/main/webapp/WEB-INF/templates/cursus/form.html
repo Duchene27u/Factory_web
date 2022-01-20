@@ -23,7 +23,7 @@
 							class="form-control" name="stagiaire" id="stagiaire">
 							<option value="">Sélectionner un stagiaire</option>
 							<option th:each="stag : ${stagiaires}" th:value="${stag.id}"
-								th:selected="${cursus.stagiaire == stag}">[[${stag.nom}]] [[${stag.prenom}]]</option>
+								th:selected="${cursus.stagiaire==stag}">[[${stag.nom}]] [[${stag.prenom}]]</option>
 						</select>
 					</div>
 					<div class="form-group">
@@ -31,7 +31,7 @@
 							class="form-control" name="stagiaire" id="stagiaire">
 							<option value="">Sélectionner une filiere</option>
 							<option th:each="fil : ${filieres}" th:value="${fil.id}"
-								th:selected="${cursus.filiere == fil}">[[${fil.label}]]</option>
+								th:selected="${cursus.filiere==fil}">[[${fil.id}]]</option>
 						</select>
 					</div>
 					<div class="form-group">
