@@ -8,7 +8,50 @@
 </head>
 <body>
 	<section layout:fragment="monContenu">
-		
+		<table class="table table-striped">
+			<thead>
+			<tr>
+				<th>Identifiant</th>
+				<th>Version</th>
+				<th>Nom</th>
+				<th>Prénom</th>
+				<th>Email</th>
+				<th>Droit</th>
+				<th>Téléphone</th>
+				<th>Rue</th>
+				<th>Complement</th>
+				<th>Code Postal</th>
+				<th>Ville</th>
+				<th></th>
+			</tr>
+			</thead>
+			
+			<tbody>
+				<tr th:each="for : ${formateurs}">
+					<td>[[${for.id}]]</td>
+					<td>[[${for.version}]]</td>
+					<td>[[${for.nom}]]</td>
+					<td>[[${for.prenom}]]</td>
+					<td>[[${for.email}]]</td>
+					<td>[[${for.droit}]]</td>
+					<td>[[${for.telephone}]]</td>
+					<td>[[${for.adr?.rue}]]</td>
+					<td>[[${for.adr?.complement}]]</td>
+					<td>[[${for.adr?.codePostal}]]</td>
+					<td>[[${for.adr?.ville}]]</td>
+					<td><div class="btn-group btn-group-sm">
+						    <a th:href="@{/formateur/edit(id=${for.id})}" type="button" class="btn btn-primary"><i class="bi bi-pen-fill"></i></a>
+						    <a th:href="@{/formateur/delete(id=${for.id})}" type="button" class="btn btn-danger"><i class="bi bi-trash-fill"></i></a>
+						  </div>
+					</td>
+				</tr>
+			</tbody>
+			
+			<tfoot>
+				<tr>
+					<td colspan="12"><a th:href="@{/formateur/add}" class="btn btn-success btn-lg"><i class="bi bi-plus-square-fill"></i></a></td>
+				</tr>			
+			</tfoot>
 	</section>
 </body>
 </html>

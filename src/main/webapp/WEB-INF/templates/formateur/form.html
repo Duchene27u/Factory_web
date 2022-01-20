@@ -4,14 +4,75 @@
 	layout:decorator="layout.html">
 <head>
 <meta charset="UTF-8">
-<title></title>
+<title>Edition du formateur</title>
 </head>
 <body>
 	<section layout:fragment="monContenu">
-		
+		<div class="card mt-3">
+			<form th:action="@{/formateur/save}" method="post">
+				<input type="hidden" name="id" th:value="${formateur.id}"> 
+				<input type="hidden" name="version" th:value="${formateur.version}">
+				<input type="hidden" name="droit" th:value="${formateur.droit}">
+				<div class="card-header bg-info text-white">
+					<h3>Edition du formateur</h3>
+				</div>
+				<div class="card-body">
+					<div class="form-group">
+						<label for="nom">Nom:</label> <input type="text"
+							class="form-control" id="nom" name="nom"
+							th:value="${formateur.nom}">
+					</div>
+					<div class="form-group">
+						<label for="prenom">Prenom:</label> <input type="text"
+							class="form-control" id="prenom" name="prenom"
+							th:value="${formateur.prenom}">
+					</div>
+					<div class="form-group">
+						<label for="email">Email:</label> <input type="text"
+							class="form-control" id="email" name="email"
+							th:value="${formateur.email}">
+					</div>
+					<div class="form-group">
+						<label for="telephone">Telephone:</label> <input type="text"
+							class="form-control" id="telephone" name="telephone"
+							th:value="${formateur.telephone}">
+					</div>
+					<div class="form-group">
+						<label for="rue">Rue:</label> <input type="text"
+							class="form-control" id="rue" name="adr.rue"
+							th:value="${formateur.adr?.rue}">
+					</div>
+					<div class="form-group">
+						<label for="complement">Complement:</label> <input type="text"
+							class="form-control" id="complement" name="adr.complement"
+							th:value="${formateur.adr?.complement}">
+					</div>
+					<div class="form-group">
+						<label for="codePostal">Code Postal:</label> <input type="text"
+							class="form-control" id="codePostal" name="adr.codePostal"
+							th:value="${formateur.adr?.codePostal}">
+					</div>
+					<div class="form-group">
+						<label for="ville">Rue:</label> <input type="text"
+							class="form-control" id="ville" name="adr.ville"
+							th:value="${formateur.adr?.ville}">
+					</div>
+				</div>
+				
+				<div class="card-footer">
+					<div class="btn-group btn-group-lg float-right">
+						<button th:href="@{/formateur/save}" type="submit" 
+							class="btn btn-success"> <i class="bi bi-check-square"></i>
+						</button>
+						<a th:href="@{/formateur/cancel}" type="button"
+							class="btn btn-warning"> <i class="bi bi-backspace"></i>
+						</a>
+					</div>
+				</div>
+		</div>
 
 	</section>
-	
+
 
 </body>
 </html>
