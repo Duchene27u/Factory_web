@@ -4,11 +4,45 @@
 		layout:decorator="layout.html">
 <head>
 <meta charset="UTF-8">
-<title></title>
+<title>Liste des compétences</title>
 </head>
 <body>
 	<section layout:fragment="monContenu">
-		
+		<div class="container mt-3">
+		<table class="table table-striped">
+			<thead>
+			<tr>
+				<th>Identifiant</th>
+				<th>Version</th>
+				<th>Niveau</th>
+				<th>Formateur</th>
+				<th>Matière</th>
+				<th></th>
+			</tr>
+			</thead>
+
+			<tbody>
+				<tr th:each="comp : ${competences}">
+					<td>[[${comp.id}]]</td>
+					<td>[[${comp.version}]]</td>
+					<td>[[${comp.niveau?.label}]]</td>
+					<td>[[${comp.formateur?.nom}]]</td>
+					<td>[[${comp.matiere?.nom}]]</td>
+					<td><div class="btn-group btn-group-sm">
+						    <a th:href="@{/competence/edit(id=${cli.id})}" type="button" class="btn btn-primary"><i class="bi bi-pen-fill"></i></a>
+						    <a th:href="@{/competence/delete(id=${cli.id})}" type="button" class="btn btn-danger"><i class="bi bi-trash-fill"></i></a>
+						  </div>
+					</td>
+				</tr>
+			</tbody>
+			
+			<tfoot>
+				<tr>
+					<td colspan="6"><a th:href="@{/competence/add}" class="btn btn-success btn-lg"><i class="bi bi-plus-square-fill"></i></a></td>
+				</tr>			
+			</tfoot>
+		</table>
+	</div>
 	</section>
 </body>
 </html>
