@@ -4,11 +4,42 @@
 	layout:decorator="layout.html">
 <head>
 <meta charset="UTF-8">
-<title></title>
+<title>Edition d'une absence</title>
 </head>
 <body>
 	<section layout:fragment="monContenu">
-		
+		<div class="card mt-3">
+			<form th:action="@{/absence/save}" method="post">
+				<input type="hidden" name="id" th:value="${absence.id}"> 
+				<input type="hidden" name="version" th:value="${absence.version}">
+				<div class="card-header bg-info text-white">
+					<h3>Edition d'une absence</h3>
+				</div>
+				<div class="card-body">
+					<div class="form-group">
+						<label for="date">Date d'absence:</label> <input type="date"
+							class="form-control" id="date" name="date"
+							th:value="${absence.date}">
+					</div>
+					<div class="form-group">
+						<label for="formateur">Formateur:</label> <select
+							class="form-control" name="formateur.id" id="formateur">
+							<option value="">Selectionner un formateur</option>
+							<option th:each="for : ${formateurs}" th:value="${for.id}"
+								th:selected="${absence.formateur.id==for.id}">[[${for.nom}]] [[${for.prenom}]]</option>
+						</select>
+					</div>
+				</div>
+				<div class="card-footer">
+					<div class="btn-group btn-group-lg float-right">
+						<button th:href="@{/absence/save}" type="submit" 
+							class="btn btn-success"> <i class="bi bi-check-square"></i>
+						</button>
+						<a th:href="@{/absence/cancel}" type="button"
+							class="btn btn-warning"> <i class="bi bi-backspace"></i>
+						</a>
+					</div>
+				</div>
 
 	</section>
 	

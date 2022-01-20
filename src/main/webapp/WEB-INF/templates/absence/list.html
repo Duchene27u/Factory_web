@@ -8,6 +8,37 @@
 </head>
 <body>
 	<section layout:fragment="monContenu">
+		<table class="table table-striped">
+			<thead>
+			<tr>
+				<th>Identifiant</th>
+				<th>Version</th>
+				<th>Date</th>
+				<th>Formateur</th>
+				<th></th>
+			</tr>
+			</thead>
+		
+			<tbody>
+				<tr th:each="abs : ${absences}">
+					<td>[[${abs.id}]]</td>
+					<td>[[${abs.version}]]</td>
+					<td>[[${abs.date}]]</td>
+					<td>[[${abs.formateur?.nom}]] [[${abs.formateur?.prenom}]]</td>
+					<td><div class="btn-group btn-group-sm">
+						    <a th:href="@{/absence/edit(id=${abs.id})}" type="button" class="btn btn-primary"><i class="bi bi-pen-fill"></i></a>
+						    <a th:href="@{/absence/delete(id=${abs.id})}" type="button" class="btn btn-danger"><i class="bi bi-trash-fill"></i></a>
+						  </div>
+					</td>
+				</tr>
+			</tbody>
+			<tfoot>
+				<tr>
+					<td colspan="5"><a th:href="@{/absence/add}" class="btn btn-success btn-lg"><i class="bi bi-plus-square-fill"></i></a></td>
+				</tr>			
+			</tfoot>
+			
+		</table>
 		
 	</section>
 </body>
