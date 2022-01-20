@@ -4,11 +4,49 @@
 		layout:decorator="layout.html">
 <head>
 <meta charset="UTF-8">
-<title></title>
+<title>Liste des différents cours proposés</title>
 </head>
 <body>
 	<section layout:fragment="monContenu">
-		
+		<div class="container mt-3">
+		<table class="table table-striped">
+			<thead>
+			<tr>
+				<th>Identifiant</th>
+				<th>Version</th>
+				<th>Durée(j)</th>
+				<th>Ordre de priorité</th>
+				<th>Filière associée</th>
+				<th>Formateur associé</th>
+				<th>Matière associée</th>
+				<th></th>
+			</tr>
+			</thead>
+
+			<tbody>
+				<tr th:each="c : ${mesCours}">
+					<td th:text="${c.id}"></td>
+					<td>[[${c.version}]]</td>
+					<td>[[${c.duree}]]</td>
+					<td>[[${c.ordre}]]</td>
+					<td>[[${c.filiere.dispositif}]] [[${c.filiere.dateDebut}]]</td>
+					<td>[[${c.formateur.nom}]] [[${c.formateur.prenom}]]</td>
+					<td>[[${c.matiere.titre}]]</td>
+					<td><div class="btn-group btn-group-sm">
+						    <a th:href="@{/cours/edit(id=${c.id})}" type="button" class="btn btn-primary"><i class="bi bi-pen-fill"></i></a>
+						    <a th:href="@{/cours/delete(id=${c.id})}" type="button" class="btn btn-danger"><i class="bi bi-trash-fill"></i></a>
+						  </div>
+					</td>
+				</tr>
+			</tbody>
+			
+			<tfoot>
+				<tr>
+					<td colspan="7"><a th:href="@{/cours/add}" class="btn btn-success btn-lg"><i class="bi bi-plus-square-fill"></i></a></td>
+				</tr>			
+			</tfoot>
+		</table>
+	</div>
 	</section>
 </body>
 </html>

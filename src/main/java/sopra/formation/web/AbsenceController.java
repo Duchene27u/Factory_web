@@ -15,9 +15,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import sopra.formation.dao.IAbsenceDao;
 import sopra.formation.dao.IUtilisateurDao;
 import sopra.formation.model.Absence;
-import sopra.formation.model.Droit;
-import sopra.formation.model.Formateur;
-import sopra.formation.model.Utilisateur;
 
 
 @Controller

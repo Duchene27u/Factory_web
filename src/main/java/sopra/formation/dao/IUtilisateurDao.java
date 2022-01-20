@@ -2,6 +2,7 @@ package sopra.formation.dao;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -34,7 +35,14 @@ public interface IUtilisateurDao extends JpaRepository<Utilisateur, Long>, Utili
 			+ "select distinct f from Formateur f join f.absences a where a.date >= :dtDebut and a.date <= :dtFin"
 			+ ") and m.titre = :nomMatiere")
 	List<Formateur> findByDispoAndMatiere(@Param("nomMatiere") String nomMatiere, @Param("dtDebut") LocalDate dtDebut, @Param("dtFin") LocalDate dtFin);
-	
+
 	@Query("select f from Formateur f")
 	List<Formateur> findAllFormateur();
+	
+	@Query("select s from Stagiaire s")
+	List<Stagiaire> findAllStagiaires();
+	
+	@Query("select s from Stagiaire s where s.id = :id")
+	Optional<Stagiaire> findStagiaireById(@Param("id") Long id);
+
 }
