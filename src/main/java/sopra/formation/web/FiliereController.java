@@ -16,93 +16,92 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import sopra.formation.dao.ICoursDao;
+import sopra.formation.dao.ICursusDao;
 import sopra.formation.dao.IFiliereDao;
-import sopra.formation.dao.IMatiereDao;
+import sopra.formation.dao.ISalleDao;
 import sopra.formation.dao.IUtilisateurDao;
-import sopra.formation.model.Cours;
 import sopra.formation.model.Filiere;
-import sopra.formation.model.Matiere;
-import sopra.formation.model.Utilisateur;
 
 @Controller
-@RequestMapping("/cours")
-public class CoursController {
+@RequestMapping("/filiere")
+public class FiliereController {
 
 	@Autowired
 	private ICoursDao coursDao;
-	
 	@Autowired
-	private IFiliereDao filiereDao;
-	
+	private ICursusDao cursusDao;
 	@Autowired
 	private IUtilisateurDao utilisateurDao;
-	
 	@Autowired
-	private IMatiereDao matiereDao;
-
+	private IFiliereDao filiereDao;
+	@Autowired
+	private ISalleDao salleDao;
+	
 	@GetMapping("")
 	public String list(Model model) {
-		List<Cours> cours = coursDao.findAll();
+		List<Filiere> filiere = filiereDao.findAll();
 
-		model.addAttribute("mesCours", cours);
+		model.addAttribute("mesFiliere", filiere);
 
-		return "cours/list";
+		return "filiere/list";
 	}
 
 	@GetMapping("/add")
 	public String add(Model model) {
-		model.addAttribute("cours", new Cours());
+		model.addAttribute("filiere", new Filiere());
 
-		model.addAttribute("filieres", filiereDao.findAll());
+		model.addAttribute("cursus", cursusDao.findAll());
 		
 		model.addAttribute("formateurs", utilisateurDao.findAll());
 		
-		model.addAttribute("matieres", matiereDao.findAll());
-		return "cours/form";
+		model.addAttribute("cours", coursDao.findAll());
+		
+		model.addAttribute("salle", salleDao.findAll());
+		
+		return "filiere/form";
 	}
 
 	@GetMapping("/edit")
 	public String edit(@RequestParam Long id, Model model) {
-		Optional<Cours> optCours = coursDao.findById(id);
+		Optional<Filiere> optFiliere = filiereDao.findById(id);
 
-		if (optCours.isPresent()) {
-			model.addAttribute("cours", optCours.get());
+		if (optFiliere.isPresent()) {
+			model.addAttribute("filiere", optFiliere.get());
 		}
 		
-		List<Filiere> filieres = filiereDao.findAll();
-		model.addAttribute("filieres", filieres);
+		model.addAttribute("cursus", cursusDao.findAll());
 		
-		List<Utilisateur> formateurs = utilisateurDao.findAll();
-		model.addAttribute("formateurs", formateurs);
+		model.addAttribute("formateurs", utilisateurDao.findAll());
 		
-		List<Matiere> matieres = matiereDao.findAll();
-		model.addAttribute("matieres", matieres);
+		model.addAttribute("cours", coursDao.findAll());
+		
+		model.addAttribute("salle", salleDao.findAll());
 
-		return "cours/form";
+		return "filiere/form";
 	}
 
 	
 	@PostMapping("/save")
-	public String saveBis(@ModelAttribute("cours") @Valid Cours cours, BindingResult result, Model model) {
+	public String saveBis(@ModelAttribute("filiere") @Valid Filiere filiere, BindingResult result, Model model) {
 		
 		if(result.hasErrors()) {
-			return "cours/form";
+			return "filiere/form";
 		}
 		
-		coursDao.save(cours);
+		filiereDao.save(filiere);
 
-		return "redirect:/cours";
+		return "redirect:/filiere";
 	}
 
 	@GetMapping("/cancel")
 	public String cancel() {
-		return "forward:/cours";
+		return "forward:/filiere";
 	}
 
 	@GetMapping("/delete")
 	public String delete(@RequestParam Long id) {
-		coursDao.deleteById(id);
+		filiereDao.deleteById(id);
 
-		return "redirect:/cours";
+		return "redirect:/filiere";
 	}
 }
