@@ -34,4 +34,7 @@ public interface IUtilisateurDao extends JpaRepository<Utilisateur, Long>, Utili
 			+ "select distinct f from Formateur f join f.absences a where a.date >= :dtDebut and a.date <= :dtFin"
 			+ ") and m.titre = :nomMatiere")
 	List<Formateur> findByDispoAndMatiere(@Param("nomMatiere") String nomMatiere, @Param("dtDebut") LocalDate dtDebut, @Param("dtFin") LocalDate dtFin);
+
+	@Query("select f from Formateur f")
+	List<Formateur> findAllFormateur();
 }

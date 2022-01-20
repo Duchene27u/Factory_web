@@ -4,14 +4,59 @@
 	layout:decorator="layout.html">
 <head>
 <meta charset="UTF-8">
-<title></title>
+<title>Edition de la compétence</title>
 </head>
 <body>
 	<section layout:fragment="monContenu">
-		
+		<div class="card mt-3">
+			<form th:action="@{/competence/saveBis}" method="post">
+				<input type="hidden" name="id" th:value="${competence.id}">
+				<input type="hidden" name="version" th:value="${competence.version}">
+				<div class="card-header bg-info text-white">
+					<h3>Edition de la compétence</h3>
+				</div>
+				<div class="card-body">
+					<div class="form-group">
+						<label for="niveau">Niveau:</label> <select
+							class="form-control" name="niveau" id="niveau">
+							<option value="">Sélectionner un niveau</option>
+							<option th:each="niv : ${niveaux}" th:value="${niv}"
+								th:selected="${competence.niveau == niv}">[[${niv.label}]]</option>
+						</select>
+					</div>
+					<div class="form-group">
+						<label for="formateur">Formateur:</label> <select
+							class="form-control" name="formateur" id="formateur">
+							<option value="">Sélectionner un formateur</option>
+							<option th:each="for : ${formateurs}" th:value="${for}"
+								th:selected="${competence.formateur?.id == for.id}">[[${for.nom}]]</option>
+						</select>
+					</div>
+					<div class="form-group">
+						<label for="matiere">Matiere:</label> <select
+							class="form-control" name="matiere" id="matiere">
+							<option value="">Sélectionner une matière</option>
+							<option th:each="mat : ${matieres}" th:value="${mat}"
+								th:selected="${competence.matiere?.id == mat.id}">[[${mat.nom}]]</option>
+						</select>
+					</div>
+					
+					
+				</div>
+				<div class="card-footer">
+					<div class="btn-group btn-group-lg float-right">
+						<button type="submit" class="btn btn-success">
+							<i class="bi bi-check-square"></i>
+						</button>
+						<a th:href="@{/competence/cancel}" type="button"
+							class="btn btn-warning"> <i class="bi bi-backspace"></i>
+						</a>
+					</div>
+				</div>
+			</form>
+		</div>
 
 	</section>
-	
 
 </body>
 </html>
