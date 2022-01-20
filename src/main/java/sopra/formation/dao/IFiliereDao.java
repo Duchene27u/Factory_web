@@ -17,5 +17,13 @@ public interface IFiliereDao extends JpaRepository<Filiere, Long> {
 	@Query("select distinct f from Filiere f left join fetch f.cours c left join fetch c.matiere where f.id = :id")
 	Filiere findByIdWithSalleReferentCours(@Param("id") Long id);
 	
+<<<<<<< HEAD
 	List<Filiere> findAll();
+=======
+	@Query("select distinct f from Filiere f left join fetch f.cours")
+	List<Filiere> findAllWithCours(); 
+	
+	@Query("select distinct f from Filiere f left join fetch f.cursus c")
+	List<Filiere> findAllWithCursus();
+>>>>>>> fc11e13d1dd3496fd8a66b21e32aac049d950399
 }

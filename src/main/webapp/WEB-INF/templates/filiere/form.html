@@ -4,14 +4,84 @@
 	layout:decorator="layout.html">
 <head>
 <meta charset="UTF-8">
-<title></title>
+<title>Edition de la filiere selectionnée</title>
 </head>
 <body>
 	<section layout:fragment="monContenu">
-		
+		<div class="card mt-3">
+			<form th:action="@{/filiere/save}" method="post">
+				<input type="hidden" name="id" th:value="${filiere.id}"> <input
+					type="hidden" name="version" th:value="${filiere.version}">
+
+				<div class="card-header bg-info text-white">
+					<h3>Edition de la filiere selectionnée</h3>
+				</div>
+
+				<div class="card-body">
+				<div class="form-group">
+						<label for="dateDebut">Date de début:</label> <input type="date"
+							class="form-control" id="dateDebut" name="dateDebut"
+							th:value="${filiere.dateDebut}"> <span class="text-danger"
+							th:errors="${filiere.dateDebut}"></span>
+					</div>
+					<div class="form-group">
+						<label for="duree">Durée:</label> <input type="text"
+							class="form-control" id="duree" name="duree"
+							th:value="${filiere.duree}"> <span class="text-danger"
+							th:errors="${filiere.duree}"></span>
+					</div>
+					<div class="form-group">
+						<label for="dispositif">Dispositif:</label> <select
+							class="form-control" name="dispositif" id="dispositif">
+							<option value="">Sélectionner un dispositif</option>
+							<option th:each="disp : ${dispositifs}" th:value="${disp}"
+								th:selected="${filiere.dispositif == disp}">[[${disp.label}]]</option>
+						</select>
+					</div>
+					<div class="form-group">
+						<label for="gestionnaire.id">Gestionnaire:</label> <select
+							class="form-control" name="gestionnaire.id" id="gestionnaire.id">
+							<option value="">Sélectionner un gestionnaire</option>
+							<option th:each="u : ${utilisateurs}" th:value="${u.id}"
+								th:selected="${filiere.gestionnaire?.id == u.id}">[[${u.nom}]]
+								[[${u.prenom}]]</option>
+						</select> <span class="text-danger" th:errors="${filiere.gestionnaire}"></span>
+					</div>
+					<div class="form-group">
+						<label for="referent.id">Formateur référent:</label> <select
+							class="form-control" name="referent.id" id="referent.id">
+							<option value="">Sélectionner un formateur</option>
+							<option th:each="f : ${formateurs}" th:value="${f.id}"
+								th:selected="${filiere.referent?.id == f.id}">[[${f.nom}]]
+								[[${f.prenom}]]</option>
+						</select> <span class="text-danger" th:errors="${filiere.referent}"></span>
+					</div>
+					<div class="form-group">
+						<label for="salle.id">Salle:</label> <select class="form-control"
+							name="salle.id" id="salle.id">
+							<option value="">Sélectionner une salle:</option>
+							<option th:each="s : ${salles}" th:value="${s.id}"
+								th:selected="${filiere.salle?.id == s.id}">[[${s.nom}]]
+							</option>
+						</select> <span class="text-danger" th:errors="${filiere.salle}"></span>
+					</div>
+
+				</div>
+				<div class="card-footer">
+					<div class="btn-group btn-group-lg float-right">
+						<button type="submit" class="btn btn-success">
+							<i class="bi bi-check-square"></i>
+						</button>
+						<a th:href="@{/filiere/cancel}" type="button"
+							class="btn btn-warning"> <i class="bi bi-backspace"></i>
+						</a>
+					</div>
+				</div>
+			</form>
+		</div>
 
 	</section>
-	
+
 
 </body>
 </html>

@@ -10,6 +10,8 @@ import javax.persistence.Id;
 import javax.persistence.Lob;
 import javax.persistence.OneToMany;
 import javax.persistence.Version;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 
 @Entity
 public class Matiere {
@@ -19,13 +21,14 @@ public class Matiere {
 	@Version
 	private int version;
 	@Column(length = 255)
+	@NotBlank(message = "Le titre doit être renseignée")
 	private String titre;
 	private int duree;
 	@Column(length = 4000)
 	private String objectifs;
 	@Column(length = 4000)
 	private String preRequis;
-	@Lob
+	@Column(length = 4000)
 	private String programme;
 	@OneToMany(mappedBy = "matiere")
 	private List<Cours> cours = new ArrayList<>();

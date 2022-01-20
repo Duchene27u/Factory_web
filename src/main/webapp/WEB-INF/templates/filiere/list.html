@@ -1,14 +1,67 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
-		xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-		layout:decorator="layout.html">
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorator="layout.html">
 <head>
 <meta charset="UTF-8">
 <title></title>
 </head>
 <body>
 	<section layout:fragment="monContenu">
-		
+		<div class="container mt-3">
+			<table class="table table-striped">
+				<thead>
+					<tr>
+						<th>Identifiant</th>
+						<th>Version</th>
+						<th>Date de début</th>
+						<th>Durée</th>
+						<th>Dispositif</th>
+						<th>Gestionnaire associé</th>
+						<th>Formateur référent</th>
+						<th>Salle associée</th>
+						<th>Liste des cursus</th>
+						<th>Liste des cours</th>
+
+					</tr>
+				</thead>
+
+				<tbody>
+					<tr th:each="f : ${mesFilieres}">
+						<td th:text="${f.id}"></td>
+						<td>[[${f.version}]]</td>
+						<td>[[${f.dateDebut}]]</td>
+						<td>[[${f.duree}]]</td>
+						<td>[[${f.dispositif}]]</td>
+						<td>[[${f.gestionnaire?.nom}]] [[${f.gestionnaire?.prenom}]]</td>
+						<td>[[${f.referent.nom}]] [[${f.referent.prenom}]]</td>
+						<td>[[${f.salle?.nom}]]</td>
+						<td><ul>
+								<li th:each="c : ${f.cursus}">[[${c?.id}]]</li>
+							</ul></td>
+						<td><ul>
+								<li th:each="c : ${f.cours}">[[${c?.matiere.titre}]]</li>
+							</ul></td>
+
+
+						<td><div class="btn-group btn-group-sm">
+								<a th:href="@{/filiere/edit(id=${f.id})}" type="button"
+									class="btn btn-primary"><i class="bi bi-pen-fill"></i></a> <a
+									th:href="@{/filiere/delete(id=${f.id})}" type="button"
+									class="btn btn-danger"><i class="bi bi-trash-fill"></i></a>
+							</div></td>
+					</tr>
+				</tbody>
+
+				<tfoot>
+					<tr>
+						<td colspan="8"><a th:href="@{/filiere/add}"
+							class="btn btn-success btn-lg"><i
+								class="bi bi-plus-square-fill"></i></a></td>
+					</tr>
+				</tfoot>
+			</table>
+		</div>
 	</section>
 </body>
 </html>
