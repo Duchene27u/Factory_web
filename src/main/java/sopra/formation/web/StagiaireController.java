@@ -16,8 +16,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import sopra.formation.dao.IUtilisateurDao;
+import sopra.formation.model.Droit;
 import sopra.formation.model.Stagiaire;
-import sopra.formation.model.Utilisateur;
 
 
 @Controller
@@ -39,7 +39,9 @@ public class StagiaireController {
 
 	@GetMapping("/add")
 	public String add(Model model) {
-		model.addAttribute("stagiaire", new Utilisateur());
+		
+		model.addAttribute("stagiaire", new Stagiaire());
+		model.addAttribute("droits", Droit.values());
 
 		return "stagiaire/form";
 	}
@@ -52,7 +54,8 @@ public class StagiaireController {
 			model.addAttribute("stagiaire", optStagiaire.get());
 		}
 		
-
+		model.addAttribute("droits", Droit.values());
+		
 		return "stagiaire/form";
 	}
 	
