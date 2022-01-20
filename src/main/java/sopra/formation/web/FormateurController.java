@@ -31,10 +31,10 @@ public class FormateurController {
 	
 	@GetMapping("")
 	public String list(Model model) {
-		List<Formateur> formateurs = personneDao.findAllFormateur();
+		List<Formateur> formateurs = personneDao.findWithCoursAndMatiere();
 
 		model.addAttribute("formateurs", formateurs);
-
+		
 		return "formateur/list";
 	}
 
@@ -42,7 +42,7 @@ public class FormateurController {
 	public String add(Model model) {
 		Formateur formateur = new Formateur();
 		formateur.setDroit(Droit.FORMATEUR);
-		model.addAttribute("formateur", formateur);
+		
 		
 		return "formateur/form";
 	}
