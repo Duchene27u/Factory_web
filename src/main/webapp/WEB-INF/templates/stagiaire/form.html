@@ -4,14 +4,87 @@
 	layout:decorator="layout.html">
 <head>
 <meta charset="UTF-8">
-<title></title>
+<title>Edition du stagiaire</title>
 </head>
 <body>
 	<section layout:fragment="monContenu">
-		
+		<div class="card mt-3">
+			<form th:action="@{/stagiaire/save}" method="post">
+				<input type="hidden" name="id" th:value="${stagiaire.id}"> <input
+					type="hidden" name="version" th:value="${stagiaire.version}">
+
+				<div class="card-header bg-info text-white">
+					<h3>Edition du stagiaire</h3>
+				</div>
+
+				<div class="card-body">
+					<div class="form-group">
+						<label for="nom">Nom:</label> <input type="text"
+							class="form-control" id="nom" name="nom"
+							th:value="${stagiaire.nom}"> <span class="text-danger"
+							th:errors="${stagiaire.nom}"></span>
+					</div>
+					<div class="form-group">
+						<label for="prenom">Prenom:</label> <input type="text"
+							class="form-control" id="prenom" name="prenom"
+							th:value="${stagiaire.prenom}"> <span class="text-danger"
+							th:errors="${stagiaire.prenom}"></span>
+					</div>
+					<div class="form-group">
+						<label for="email">Email:</label> <input type="text"
+							class="form-control" id="email" name="email"
+							th:value="${stagiaire.email}"> <span class="text-danger"
+							th:errors="${stagiaire.email}"></span>
+					</div>
+					<div class="form-group">
+						<label for="telephone">Telephone:</label> <input type="text"
+							class="form-control" id="telephone" name="telephone"
+							th:value="${stagiaire.telephone}"> <span class="text-danger"
+							th:errors="${stagiaire.telephone}"></span>
+					</div>
+					<div class="form-group">
+						<label for="rue">Rue:</label> <input type="text"
+							class="form-control" id="rue" name="rue"
+							th:value="${stagiaire.rue}"> <span class="text-danger"
+							th:errors="${stagiaire.rue}"></span>
+					</div>
+					<div class="form-group">
+						<label for="codePostal">Code Postal:</label> <input type="number"
+							class="form-control" id="codePostal" name="codePostal"
+							th:value="${stagiaire.codePostal}"> <span class="text-danger"
+							th:errors="${stagiaire.codePostal}"></span>
+					</div>	
+					<div class="form-group">
+						<label for="ville">Ville:</label> <input type="text"
+							class="form-control" id="ville" name="ville"
+							th:value="${stagiaire.ville}"> <span class="text-danger"
+							th:errors="${stagiaire.ville}"></span>
+					</div>
+					<div class="form-group">
+						<label for="cursus.id">Cursus:</label> <select
+							class="form-control" name="cursus.id" id="cursus.id">
+							<option value="">Sélectionner un cursus:</option>
+							<option th:each="c : ${cursus}" th:value="${c.id}"
+								th:selected=" == }">[[${f.nom}]]
+								([[${f.prenom}]] )</option>
+						</select> <span class="text-danger" th:errors="${stagiaire.cursus}"></span>
+					</div>						
+				</div>
+				<div class="card-footer">
+					<div class="btn-group btn-group-lg float-right">
+						<button type="submit" class="btn btn-success">
+							<i class="bi bi-check-square"></i>
+						</button>
+						<a th:href="@{/stagiaire/cancel}" type="button"
+							class="btn btn-warning"> <i class="bi bi-backspace"></i>
+						</a>
+					</div>
+				</div>
+			</form>
+		</div>
 
 	</section>
-	
+
 
 </body>
 </html>

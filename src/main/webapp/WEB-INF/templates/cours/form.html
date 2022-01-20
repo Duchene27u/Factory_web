@@ -4,14 +4,75 @@
 	layout:decorator="layout.html">
 <head>
 <meta charset="UTF-8">
-<title></title>
+<title>Edition du cours selectionné</title>
 </head>
 <body>
 	<section layout:fragment="monContenu">
-		
+		<div class="card mt-3">
+			<form th:action="@{/cours/save}" method="post">
+				<input type="hidden" name="id" th:value="${cours.id}"> <input
+					type="hidden" name="version" th:value="${cours.version}">
+
+				<div class="card-header bg-info text-white">
+					<h3>Edition du cours selectionné</h3>
+				</div>
+
+				<div class="card-body">
+					<div class="form-group">
+						<label for="duree">Durée:</label> <input type="text"
+							class="form-control" id="duree" name="duree"
+							th:value="${cours.duree}"> <span class="text-danger"
+							th:errors="${cours.duree}"></span>
+					</div>
+					<div class="form-group">
+						<label for="ordre">Ordre de priorité:</label> <input type="number"
+							class="form-control" id="ordre" name="ordre"
+							th:value="${cours.ordre}"> <span class="text-danger"
+							th:errors="${cours.ordre}"></span>
+					</div>
+					<div class="form-group">
+						<label for="fournisseur.id">Filière:</label> <select
+							class="form-control" name="filiere.id" id="filiere.id">
+							<option value="">Sélectionner une filière</option>
+							<option th:each="f : ${filieres}" th:value="${f.id}"
+								th:selected="${cours.filiere?.id == f.id}">[[${f.dispositif}]]
+								([[${f.dateDebut}]])</option>
+						</select> <span class="text-danger" th:errors="${cours.filiere}"></span>
+					</div>
+					<div class="form-group">
+						<label for="formateur.id">Formateur:</label> <select
+							class="form-control" name="formateur.id" id="formateur.id">
+							<option value="">Sélectionner un formateur:</option>
+							<option th:each="f : ${formateurs}" th:value="${f.id}"
+								th:selected="${cours.formateur?.id == f.id}">[[${f.nom}]]
+								([[${f.prenom}]] )</option>
+						</select> <span class="text-danger" th:errors="${cours.formateur}"></span>
+					</div>
+					<div class="form-group">
+						<label for="matiere.id">Matière:</label> <select
+							class="form-control" name="matiere.id" id="matiere.id">
+							<option value="">Sélectionner une matière:</option>
+							<option th:each="m : ${matieres}" th:value="${m.id}"
+								th:selected="${cours.matiere?.id == m.id}">[[${m.titre}]]
+							</option>
+						</select> <span class="text-danger" th:errors="${cours.matiere}"></span>
+					</div>
+				</div>
+				<div class="card-footer">
+					<div class="btn-group btn-group-lg float-right">
+						<button type="submit" class="btn btn-success">
+							<i class="bi bi-check-square"></i>
+						</button>
+						<a th:href="@{/cours/cancel}" type="button"
+							class="btn btn-warning"> <i class="bi bi-backspace"></i>
+						</a>
+					</div>
+				</div>
+			</form>
+		</div>
 
 	</section>
-	
+
 
 </body>
 </html>
